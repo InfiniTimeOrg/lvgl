@@ -1678,6 +1678,14 @@ e.g. "stm32f769xx.h" or "stm32f429xx.h" */
 #    define  LV_LABEL_LONG_TXT_HINT          0
 #  endif
 #endif
+
+#ifndef LV_LABEL_SCROLL_START_DELAY
+#  ifdef CONFIG_LV_LABEL_SCROLL_START_DELAY
+#    define LV_LABEL_SCROLL_START_DELAY CONFIG_LV_LABEL_SCROLL_START_DELAY
+#  else
+#    define  LV_LABEL_SCROLL_START_DELAY 0
+#  endif
+#endif
 #endif
 
 /*LED (dependencies: -)*/

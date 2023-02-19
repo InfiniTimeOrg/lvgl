@@ -648,6 +648,8 @@ typedef void * lv_obj_user_data_t;
 
 /*Store extra some info in labels (12 bytes) to speed up drawing of very long texts*/
 #  define LV_LABEL_LONG_TXT_HINT          0
+
+#define LV_LABEL_SCROLL_START_DELAY 0
 #endif
 
 /*LED (dependencies: -)*/
