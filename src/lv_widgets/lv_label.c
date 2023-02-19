@@ -1059,7 +1059,7 @@ void lv_label_refr_text(lv_obj_t * label)
             lv_anim_set_playback_time(&a, a.time);
 
             lv_anim_t * anim_cur = lv_anim_get(label, (lv_anim_exec_xcb_t)lv_label_set_offset_x);
-            int32_t act_time = 0;
+            int32_t act_time = -LV_LABEL_SCROLL_START_DELAY;
             bool playback_now = false;
             if(anim_cur) {
                 act_time = anim_cur->act_time;
@@ -1094,7 +1094,7 @@ void lv_label_refr_text(lv_obj_t * label)
             lv_anim_set_playback_time(&a, a.time);
 
             lv_anim_t * anim_cur = lv_anim_get(label, (lv_anim_exec_xcb_t)lv_label_set_offset_y);
-            int32_t act_time = 0;
+            int32_t act_time = -LV_LABEL_SCROLL_START_DELAY;
             bool playback_now = false;
             if(anim_cur) {
                 act_time = anim_cur->act_time;
@@ -1157,7 +1157,7 @@ void lv_label_refr_text(lv_obj_t * label)
             lv_anim_set_time(&a, lv_anim_speed_to_time(ext->anim_speed, a.start, a.end));
 
             lv_anim_t * anim_cur = lv_anim_get(label, (lv_anim_exec_xcb_t)lv_label_set_offset_x);
-            int32_t act_time = anim_cur ? anim_cur->act_time : 0;
+            int32_t act_time = anim_cur ? anim_cur->act_time : -LV_LABEL_SCROLL_START_DELAY;
             if(act_time < a.time) {
                 a.act_time = act_time;      /*To keep the old position*/
                 a.early_apply = 0;
@@ -1178,7 +1178,7 @@ void lv_label_refr_text(lv_obj_t * label)
             lv_anim_set_time(&a, lv_anim_speed_to_time(ext->anim_speed, a.start, a.end));
 
             lv_anim_t * anim_cur = lv_anim_get(label, (lv_anim_exec_xcb_t)lv_label_set_offset_y);
-            int32_t act_time = anim_cur ? anim_cur->act_time : 0;
+            int32_t act_time = anim_cur ? anim_cur->act_time : -LV_LABEL_SCROLL_START_DELAY;
             if(act_time < a.time) {
                 a.act_time = act_time;      /*To keep the old position*/
                 a.early_apply = 0;
