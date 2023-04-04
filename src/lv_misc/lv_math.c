@@ -75,6 +75,40 @@ LV_ATTRIBUTE_FAST_MEM int16_t _lv_trigo_sin(int16_t angle)
 }
 
 /**
+ * Return with arcsine
+ * @param arg
+ * @return arcsine of 'arg'. asin(-32767) = -90, asin(32767) = 90
+ */
+LV_ATTRIBUTE_FAST_MEM int16_t _lv_trigo_asin(int16_t arg)
+{
+    int16_t a = arg < 0 ? -arg : arg;
+
+    int16_t angle = 45;
+    int16_t low   = 0;
+    int16_t high  = 90;
+    while(low <= high) {
+        if(a >= sin0_90_table[angle - 1] && a <= sin0_90_table[angle + 1]) {
+            if(a <= (sin0_90_table[angle - 1] + sin0_90_table[angle]) / 2) {
+                angle--;
+            }
+            else if(a > (sin0_90_table[angle] + sin0_90_table[angle + 1]) / 2) {
+                angle++;
+            }
+            break;
+        }
+        else if(a < sin0_90_table[angle]) {
+            high = angle - 1;
+        }
+        else {
+            low = angle + 1;
+        }
+        angle = (low + high) / 2;
+    }
+
+    return arg < 0 ? -angle : angle;
+}
+
+/**
  * Calculate a value of a Cubic Bezier function.
  * @param t time in range of [0..LV_BEZIER_VAL_MAX]
  * @param u0 start values in range of [0..LV_BEZIER_VAL_MAX]

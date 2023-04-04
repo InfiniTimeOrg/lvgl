@@ -63,6 +63,13 @@ typedef struct {
  */
 LV_ATTRIBUTE_FAST_MEM int16_t _lv_trigo_sin(int16_t angle);
 
+/**
+ * Return with arcsine
+ * @param arg
+ * @return arcsine of 'arg'. asin(-32767) = -90, asin(32767) = 90
+ */
+LV_ATTRIBUTE_FAST_MEM int16_t _lv_trigo_asin(int16_t arg);
+
 //! @endcond
 
 /**
