@@ -35,6 +35,7 @@ extern "C" {
 
 /** Describes the properties of a glyph. */
 typedef struct {
+    const struct _lv_font_struct *resolved_font; /**< Pointer to a font where the gylph was actually found after handling fallbacks*/
     uint16_t adv_w; /**< The glyph needs this space. Draw the next glyph after this width. */
     uint16_t box_w;  /**< Width of the glyph's bounding box*/
     uint16_t box_h;  /**< Height of the glyph's bounding box*/
@@ -70,6 +71,7 @@ typedef struct _lv_font_struct {
     int8_t underline_thickness;     /**< Thickness of the underline*/
 
     void * dsc;                     /**< Store implementation specific or run_time data or caching here*/
+    const struct _lv_font_struct * fallback;   /**< Fallback font for missing glyph. Resolved recursively */
 #if LV_USE_USER_DATA
     lv_font_user_data_t user_data;  /**< Custom user data for font. */
 #endif

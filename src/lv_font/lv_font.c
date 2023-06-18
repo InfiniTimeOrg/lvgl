@@ -61,7 +61,18 @@ const uint8_t * lv_font_get_glyph_bitmap(const lv_font_t * font_p, uint32_t lett
 bool lv_font_get_glyph_dsc(const lv_font_t * font_p, lv_font_glyph_dsc_t * dsc_out, uint32_t letter,
                            uint32_t letter_next)
 {
-    return font_p->get_glyph_dsc(font_p, dsc_out, letter, letter_next);
+    dsc_out->resolved_font = NULL;
+    const lv_font_t * f = font_p;
+    bool found = false;
+    while(f) {
+        found = f->get_glyph_dsc(f, dsc_out, letter, letter_next);
+        if (found) {
+            dsc_out->resolved_font = f;
+            break;
+        }
+        f = f->fallback;
+    }
+    return found;
 }
 
 /**
